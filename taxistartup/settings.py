@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     'serviceapp.apps.ServiceappConfig',
     'directionapp.apps.DirectionappConfig',
     # other apps
-    'rest_framework.apps.RestFrameworkConfig',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+
 ]
 
 AUTH_USER_MODEL = 'userapp.CustomUser'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,13 +59,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
+
 ROOT_URLCONF = 'taxistartup.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

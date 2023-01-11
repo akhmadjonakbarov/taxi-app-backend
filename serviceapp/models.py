@@ -2,6 +2,7 @@ from django.db import models
 from userapp.models import CustomUser
 from directionapp.models import Direction
 
+
 # Create your models here.
 class Service(models.Model):
     title = models.CharField(max_length=250)
@@ -10,7 +11,7 @@ class Service(models.Model):
     from_where = models.CharField(max_length=250)
     to_where = models.CharField(max_length=250)
     car_type = models.CharField(max_length=250)
-    car_images = models.ForeignKey('CarImages', on_delete=models.CASCADE, related_name="car_images")
+    # car_images = models.ForeignKey('CarImages', on_delete=models.CASCADE, related_name="car_images")
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_services")
