@@ -1,1 +1,1 @@
-web: gunicorn taxistartup.wsgi
+web: python manage.py migrate && gunicorn taxistartup.wsgi
