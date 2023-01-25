@@ -92,25 +92,25 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-CSRF_COOKIE_DOMAIN = '*'
-
-CSRF_TRUSTED_ORIGINS = ['*']
-
-CORS_ALLOWED_ORIGINS = ['*']
-
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
-
-CORS_ORIGIN_WHITELIST = (
-
-    '*'
-)
+# CSRF_COOKIE_DOMAIN = '*'
+#
+# CSRF_TRUSTED_ORIGINS = ['*']
+#
+# CORS_ALLOWED_ORIGINS = ['*']
+#
+# CORS_ALLOW_METHODS = [
+#     "DELETE",
+#     "GET",
+#     "OPTIONS",
+#     "PATCH",
+#     "POST",
+#     "PUT",
+# ]
+#
+# CORS_ORIGIN_WHITELIST = (
+#
+#     '*'
+# )
 
 ROOT_URLCONF = 'taxistartup.urls'
 
