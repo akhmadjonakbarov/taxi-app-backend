@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_d#)wd6eda)vwdc9m@s)qxw46+j2ngfwxh6dcnpu#umawv3763'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -92,16 +92,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-CSRF_COOKIE_DOMAIN = '127.0.0.1'
+CSRF_COOKIE_DOMAIN = '*'
 
-CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['*']
 
-CORS_ALLOWED_ORIGINS = [
-    "https://10.0.2.2:8000",
-    "https://sub.example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:8000",
-]
+CORS_ALLOWED_ORIGINS = ['*']
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -114,8 +109,7 @@ CORS_ALLOW_METHODS = [
 
 CORS_ORIGIN_WHITELIST = (
 
-    '127.0.0.1:8000',
-    "10.0.2.2:8000"
+    '*'
 )
 
 ROOT_URLCONF = 'taxistartup.urls'
@@ -123,7 +117,7 @@ ROOT_URLCONF = 'taxistartup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
