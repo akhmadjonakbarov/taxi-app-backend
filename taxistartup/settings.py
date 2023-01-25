@@ -93,7 +93,9 @@ SIMPLE_JWT = {
 }
 
 CSRF_COOKIE_DOMAIN = '127.0.0.1'
+
 CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1']
+
 CORS_ALLOWED_ORIGINS = [
     "https://10.0.2.2:8000",
     "https://sub.example.com",
@@ -109,7 +111,6 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
-
 
 CORS_ORIGIN_WHITELIST = (
 

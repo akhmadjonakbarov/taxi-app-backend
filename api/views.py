@@ -10,13 +10,14 @@ from rest_framework.status import (
 from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import AccessToken
 
 from carapp.models import Car
 from serviceapp.models import Service
 from userapp.models import CustomUser
 from .serializers import (
-    ServiceSerializer, CustomUserSerializer, MyTokenObtainPairSerializer,
-    CustomUserSerializerWithToken, ServiceUpdatedSerializer
+    ServiceSerializer, CustomUserSerializer,
+    CustomUserSerializerWithToken, ServiceUpdatedSerializer, MyTokenObtainPairSerializer
 )
 import jwt
 

@@ -1,11 +1,15 @@
+import datetime
+
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenObtainSerializer
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from userapp.models import CustomUser
 from serviceapp.models import Service
 
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+class MyTokenObtainPairSerializer(TokenObtainSerializer):
+    token_class = AccessToken
+
     @classmethod
     def get_token(cls, user: CustomUser):
         token = super().get_token(user=user)
@@ -27,9 +31,18 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return data
 
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(required=True)
-    password = serializers.CharField(required=True)
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'phone_number', 'password')
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+    def create(self, validated_data):
+        user = CustomUser.objects.create_user(validated_data['username'], validated_data['phone_number'],
+                                              validated_data['password'])
+        return user
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
