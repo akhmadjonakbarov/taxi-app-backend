@@ -1,13 +1,8 @@
 from django.contrib import admin
-from .models import Service, CarImages
+from .models import Service
 
 
 # Register your models here.
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'user', ]
-
-
-@admin.register(CarImages)
-class CarImagesAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['phone_number', 'user']

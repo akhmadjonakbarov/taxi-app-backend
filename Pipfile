@@ -11,6 +11,8 @@ django-filter = "*"
 django-rest-knox = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
+pytz = "*"
+pyjwt = "*"
 
 [dev-packages]
 autopep8 = "*"
