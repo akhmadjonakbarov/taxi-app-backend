@@ -178,7 +178,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = ''
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'statics'
+    joinpath(BASE_DIR, 'statics')
 ]
 
 MEDIA_ROOT = joinpath(BASE_DIR, 'statics/images')
