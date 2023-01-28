@@ -13,6 +13,7 @@ django-cors-headers = "*"
 pytz = "*"
 pyjwt = "*"
 gunicorn = "*"
+django-rest-knox = "*"
 
 [dev-packages]
 autopep8 = "*"
