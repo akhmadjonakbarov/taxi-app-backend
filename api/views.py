@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from rest_framework.permissions import (AllowAny, )
+from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework.response import Response
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework import generics
@@ -82,6 +82,34 @@ class RegisterView(generics.GenericAPIView):
                 "token": token
             }
         )
+
+
+class GetUserView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get_token_ttl(self):
+        return knox_settings.TOKEN_TTL
+
+    def get_expiry_datetime_format(self):
+        return knox_settings.EXPIRY_DATETIME_FORMAT
+
+    def format_expiry_datetime(self, expiry):
+        datetime_format = self.get_expiry_datetime_format()
+        return DateTimeField(format=datetime_format).to_representation(expiry)
+
+    def get_post_response_data(self, request, token, instance):
+        data = {
+            'expiry': self.format_expiry_datetime(instance.expiry),
+            'token': token
+        }
+        return data
+
+    def get(self, request):
+        user = request.user
+        serializer = CustomUserSerializer(user, many=False)
+        token_ttl = self.get_token_ttl()
+        instance, token = AuthToken.objects.create(user, token_ttl)
+        token = self.get_post_response_data(request, token, instance)
+        return Response({"user":serializer.data, "token":token})
 
 
 class ServiceGetView(generics.ListAPIView):
