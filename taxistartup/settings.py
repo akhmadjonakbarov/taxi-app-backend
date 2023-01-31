@@ -72,25 +72,25 @@ REST_KNOX = {
 }
 
 
-CSRF_COOKIE_DOMAIN = '*'
+# CSRF_COOKIE_DOMAIN = '*'
 
-CSRF_TRUSTED_ORIGINS = ['*']
+# CSRF_TRUSTED_ORIGINS = ['*']
 
-CORS_ALLOWED_ORIGINS = ['*']
+# CORS_ALLOWED_ORIGINS = ['*']
 
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
+# CORS_ALLOW_METHODS = [
+#     "DELETE",
+#     "GET",
+#     "OPTIONS",
+#     "PATCH",
+#     "POST",
+#     "PUT",
+# ]
 
-CORS_ORIGIN_WHITELIST = (
+# CORS_ORIGIN_WHITELIST = (
 
-    '*'
-)
+#     '*'
+# )
 
 CORS_ALLOW_ALL_ORIGINS = True
 
