@@ -14,6 +14,7 @@ pytz = "*"
 pyjwt = "*"
 gunicorn = "*"
 django-rest-knox = "*"
+whitenoise = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -1,4 +1,5 @@
 from datetime import timedelta
+import os
 from pathlib import Path
 from os.path import join as joinpath
 from rest_framework.settings import api_settings
@@ -9,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-_d#)wd6eda)vwdc9m@s)qxw46+j2ngfwxh6dcnpu#umawv3763'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     # my apps
     'userapp.apps.UserappConfig',
@@ -36,6 +38,7 @@ AUTH_USER_MODEL = 'userapp.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -69,25 +72,27 @@ REST_KNOX = {
 }
 
 
-# CSRF_COOKIE_DOMAIN = '*'
-#
-# CSRF_TRUSTED_ORIGINS = ['*']
-#
-# CORS_ALLOWED_ORIGINS = ['*']
-#
-# CORS_ALLOW_METHODS = [
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# ]
-#
-# CORS_ORIGIN_WHITELIST = (
-#
-#     '*'
-# )
+CSRF_COOKIE_DOMAIN = '*'
+
+CSRF_TRUSTED_ORIGINS = ['*']
+
+CORS_ALLOWED_ORIGINS = ['*']
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ORIGIN_WHITELIST = (
+
+    '*'
+)
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'taxistartup.urls'
 
@@ -150,18 +155,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
 # MEDIA_URL = '/images/'
 MEDIA_URL = ''
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'statics'
-]
 
-MEDIA_ROOT = joinpath(BASE_DIR, 'statics/images')
+MEDIA_ROOT = joinpath(BASE_DIR, 'static/images')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_ROOT = joinpath(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = joinpath(BASE_DIR, 'staticfiles')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+
+#     os.path.join(BASE_DIR, "static")
+# ]
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
