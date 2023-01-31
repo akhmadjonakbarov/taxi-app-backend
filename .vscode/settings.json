@@ -6,6 +6,12 @@
             "driver": "SQLite",
             "name": "TaxiAppDatabase",
             "database": "${workspaceFolder:taxistartup}/db.sqlite3"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "TaxiApp",
+            "database": "${workspaceFolder:taxistartup}/db.sqlite3"
         }
     ]
 }

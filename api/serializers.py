@@ -6,15 +6,19 @@ from serviceapp.models import Service
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'first_name','last_name', 'phone_number', 'password')
+        fields = (
+            'id',
+            'first_name',
+            'phone_number',
+            'password',
+        )
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(
-            first_name = validated_data['first_name'], 
-            last_name = validated_data['last_name'],
+        user = CustomUser.objects.create(
+            first_name=validated_data['first_name'],
             username=validated_data['phone_number'],
             phone_number=validated_data['phone_number'],
             password=validated_data['password'],
@@ -36,8 +40,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'services',
         )
 
-    def get_services(self, obj: CustomUser):
-        services = obj.get_services()
+    def get_services(self, user: CustomUser):
+        services = user.get_services()
         serializer = ServiceSerializer(services, many=True)
         return serializer.data
 
@@ -62,6 +66,7 @@ class CustomUserSerializerWithSomeFields(serializers.ModelSerializer):
 
 class ServiceSerializer(serializers.ModelSerializer):
     user = CustomUserSerializerWithSomeFields(many=False)
+
     class Meta:
         model = Service
         fields = (
@@ -74,5 +79,3 @@ class ServiceSerializer(serializers.ModelSerializer):
             'car_type',
             'user',
         )
-
-
