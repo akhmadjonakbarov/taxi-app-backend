@@ -23,7 +23,8 @@ from .serializers import (
 
 class RoutesView(APIView):
     permission_classes = (AllowAny,)
-    main_url: str = "http://127.0.0.1:8000/"
+    main_url: str = "https://taxibackend-production.up.railway.app/"
+    localhost:str = "http://127.0.0.1/"
 
     def get(self, request):
         routes = [
